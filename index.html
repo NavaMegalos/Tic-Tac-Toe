@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe By Megalos</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+
+<body>
+    <main class="app">
+        <section class="game__selection">
+
+        </section>
+
+        <section class="game__playing">
+            <div class="game__playing-header">
+                <img class="grid-item grid-item-1" src="./assets/logo.svg" alt="">
+                <input class="grid-item grid-item-2" type="button" name="turn">
+                <input class="grid-item grid-item-3" type="button" onclick="resetGame()" value="Reset">
+            </div>
+
+            <div class="content">
+                <table>
+                    <tr>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+
+                    <tr>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+                    </tr>
+
+                    </tr>
+                    <tr>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+                        <td onclick="onClickCell(this)"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
