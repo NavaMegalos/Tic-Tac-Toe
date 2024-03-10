@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe By Megalos</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/main.js" defer></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,36 +19,72 @@
 
         <section class="game__playing">
             <div class="game__playing-header">
-                <img class="grid-item grid-item-1" src="./assets/logo.svg" alt="">
-                <input class="grid-item grid-item-2" type="button" name="turn">
-                <input class="grid-item grid-item-3" type="button" onclick="resetGame()" value="Reset">
+                <img src="./assets/logo.svg" width="70px" height="30px" alt="logo tic tac toe">
+                <div class="game__playing-header-turn">
+                    <img id="turn" on src="assets/icon-x.svg" width="20px" height="20px" alt="" style="filter: grayscale(); opacity: .4;">
+                    <p> TURN </p>
+                </div>
+                <div onclick="resetGame()" class="game__playing-header-restart">
+                    <img src="./assets/icon-restart.svg" width="20px" height="20px" alt="restart button game">
+                </div>
             </div>
 
             <div class="content">
-                <table>
-                    <tr>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
+                <div class="board">
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
 
-                    <tr>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
-                    </tr>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
 
-                    </tr>
-                    <tr>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
-                        <td onclick="onClickCell(this)"></td>
-                    </tr>
-                </table>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="shadowTurn(this)" 
+                        onmouseout="shadowTurn(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                </div>
 
             </div>
         </section>
     </main>
 
+    <script src="./js/main.js" defer></script>
 </body>
 
 </html>

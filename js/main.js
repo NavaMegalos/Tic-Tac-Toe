@@ -1,6 +1,7 @@
 let winner = false
-let turn = ''
-const cells = document.getElementsByTagName('td')
+let turn = 'X'
+const cells = document.getElementsByClassName('cell')
+const imgTurn = document.getElementById('turn')
 
 const turns = [
     "X", "O"
@@ -17,8 +18,24 @@ const winnerCombinations = [
     [ 2, 5, 8 ],
 ]
 
+//I HAVE TO RESET TO EMPTY VALUE THE CELLS FOR BEING ABLE TO DO THE HOVER TRICK OF EACH TURN
+//(ALSO, I AM NOT SURE THAT I HAVE TO DO THIS BUT I AM SO LAZY FOR SEARCH FOR AN OPTIMAL SOLUTION AT THE MOMENT)
+for(let i = 0; i < cells.length; i ++) {
+    cells[i].textContent = ''
+}
 
-const getTurn = () => {
+const showTurn = () => {
+    if(turn === turns[0]) {
+        imgTurn.setAttribute("src", "../assets/icon-x.svg")
+    }
+    else if(turn === turns[1]) {
+        imgTurn.setAttribute("src", "../assets/icon-o.svg")
+    }
+
+}
+
+
+const changeTurn = () => {
     turn == turns[0] ?
         turn = turns[1] :
             turn = turns[0]
@@ -29,8 +46,10 @@ const getTurn = () => {
 const resetGame = () => {
     for(let i = 0; i < cells.length; i ++) {
         cells[i].textContent = ''
+        cells[i].className = "cell"
     }
-    turn = ''
+    turn = 'X'
+    showTurn()
     winner = false
 }
 
@@ -53,21 +72,40 @@ const checkWinner = () => {
 
         if(oCounts == 3) {
             alert("O Winner")
-            winner = false
+            winner = true
             return
         }
     })
 
 }
 
-const onClickCell = ( value ) => {
-    if (!value.textContent && !winner) {
-        value.textContent = getTurn()
+const onClickCell = ( square ) => {
+    if (square.textContent != turns[0] && square.textContent != turns[1] && !winner) {
+        square.textContent = turn
+        turn = changeTurn()
+        showTurn()
+        square.className = "cell"
+        square.classList.add('clicked')
+        if(square.textContent === turns[0]) {
+            square.classList.add('x_clicked')
+        } else{
+            square.classList.add('o_clicked')
+        }
         checkWinner()
         return
     }
 
-    console.log("Invalid position")
-
-
+    return 
 }
+
+const shadowTurn = ( square ) => {
+    if(!square.textContent && square.className !== "clicked" && !winner) {
+        if(turn === turns[0])
+            square.classList.toggle('x_hover')
+        if(turn === turns[1])
+            square.classList.toggle('o_hover')
+
+    }
+}
+
+showTurn()
