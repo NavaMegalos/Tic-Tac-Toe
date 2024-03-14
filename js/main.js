@@ -2,6 +2,11 @@ let winner = false
 let turn = 'X'
 const cells = document.getElementsByClassName('cell')
 const imgTurn = document.getElementById('turn')
+const selection = document.getElementsByClassName("game__selection")
+const playing = document.getElementsByClassName("game__playing")
+const playerOptions = document.getElementsByName('selected')
+let playerTurn = ""
+let gameVersus = false
 
 const turns = [
     "X", "O"
@@ -51,6 +56,7 @@ const resetGame = () => {
     turn = 'X'
     showTurn()
     winner = false
+    if(gameVersus === "CPU") startGameVsCpu()
 }
 
 const checkWinner = () => {
@@ -79,6 +85,54 @@ const checkWinner = () => {
 
 }
 
+
+const shadowTurn = ( square ) => {
+    if(!square.textContent && square.className !== "clicked" && !winner) {
+        if(turn === turns[0])
+            square.classList.toggle('x_hover')
+        if(turn === turns[1])
+            square.classList.toggle('o_hover')
+
+    }
+}
+
+const getPlayerSelection = () => {
+    let option
+    playerOptions.forEach( opt => {
+        if( opt.checked )
+            option = opt.value
+
+    })
+    return  option
+}
+
+const CPUMove = () => {
+    let randomNumber = Math.floor(Math.random()*10)
+    while(onClickCell( cells[randomNumber]) === 0 ) {
+        randomNumber = Math.floor(Math.random()*10)
+    }
+
+}
+
+const startGameVsCpu = () => {
+    selection[0].style.display = "none"
+    playing[0].style.display = "block"
+    gameVersus = "CPU"
+    playerTurn = getPlayerSelection()
+    if(turn !== playerTurn) {
+        let randomNumber = Math.floor(Math.random() * 8)
+        console.log(randomNumber)
+        while(onClickCell(cells[randomNumber]) === 0) {
+            randomNumber = Math.floor(Math.random() * 8)
+        }
+    }
+}
+
+const startGameVsPlayer = () => {
+    selection[0].style.display = "none"
+    playing[0].style.display = "block"
+}
+
 const onClickCell = ( square ) => {
     if (square.textContent != turns[0] && square.textContent != turns[1] && !winner) {
         square.textContent = turn
@@ -92,20 +146,18 @@ const onClickCell = ( square ) => {
             square.classList.add('o_clicked')
         }
         checkWinner()
-        return
+        playerTurn = getPlayerSelection()
+        if(gameVersus === "CPU" && turn !== playerTurn && !winner) {
+            let randomNumber = Math.floor(Math.random() * 8)
+            while(onClickCell(cells[randomNumber]) === 0) {
+                randomNumber = Math.floor(Math.random() * 8)
+            }
+            checkWinner()
+        }
+        return 1
     }
 
-    return 
-}
-
-const shadowTurn = ( square ) => {
-    if(!square.textContent && square.className !== "clicked" && !winner) {
-        if(turn === turns[0])
-            square.classList.toggle('x_hover')
-        if(turn === turns[1])
-            square.classList.toggle('o_hover')
-
-    }
+    return 0
 }
 
 showTurn()

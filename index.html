@@ -14,10 +14,30 @@
 <body>
     <main class="app">
         <section class="game__selection">
+            <img src="./assets/logo.svg" width="72px" height="32px" alt="logo tic tac toe">
+            <div class="game__selection-select">
+                <p>PICK PLAYER 1'S MARK</p>
+                <div class="game__selection-checkbox-selection">
+                    <input type="radio" id="x_selected" name="selected" value="X" checked>
+                    <label for="x_selected">
+                        <img src="./assets/icon-x.svg" alt="">
+                    </label>
+                    <input type="radio" id="o_selected" name="selected" value="O">
+                    <label for="o_selected">
+                        <img src="./assets/icon-o.svg" alt="">
+                    </label>
+                </div>
+                <p>REMEMBER : X GOES FIRST </p>
+            </div>
+            <div class="game__selection-versus">
+                <button onclick="startGameVsCpu()" class="btn btn-yellow" type="button">NEW GAME (VS CPU)</button>
+                <button onclick="startGameVsPlayer()" class="btn btn-blue" type="button">NEW GAME (VS PLAYER)</button>
+            </div>
+            
 
         </section>
 
-        <section class="game__playing">
+        <section class="game__playing" style="display: none;">
             <div class="game__playing-header">
                 <img src="./assets/logo.svg" width="70px" height="30px" alt="logo tic tac toe">
                 <div class="game__playing-header-turn">
