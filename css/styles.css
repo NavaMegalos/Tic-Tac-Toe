@@ -42,6 +42,7 @@
 body {
     background-color: hsl(var(--clr-dark-navy));
     font-family: var(--base-ff);
+    color-scheme: ligth dark;
 }
 
 .app {
@@ -140,33 +141,21 @@ body {
 
 
 .winner-cell-x {
-    width: 140px;
-    height: 145px;
     background-color: hsl(var(--clr-primary-light-blue));
-    box-shadow: 0px 8px rgba(0,0,0,0.25); 
-    border-radius: .8rem;
-    text-align: center;
-    line-height: 130px;
-    position: relative;
-    cursor: pointer;
 }
 
-.winner-cell-x ~ .x_clicked::after {
-    content: url('../assets/icon-x-outline.svg');
-    background-color: hsl(var(--clr-semi-dark-navy), 6);
+.winner-cell-x.x_clicked::after  {
+    content: url("../assets/icon-x.svg");
+    filter: brightness(28%) saturate(32%) hue-rotate(202deg) opacity(90%) ;
 }
 
 .winner-cell-o {
-    width: 140px;
-    height: 145px;
-    background-color: hsl(var(--clr-semi-dark-navy));
-    box-shadow: 0px 8px rgba(0,0,0,0.25); 
-    border-radius: .8rem;
-    text-align: center;
-    line-height: 130px;
-    color: white;
-    position: relative;
-    cursor: pointer;
+    background-color: hsl(var(--clr-primary-light-yellow));
+}
+
+.winner-cell-o.o_clicked::after  {
+    content: url("../assets/icon-o.svg");
+    filter: brightness(28%) saturate(32%) hue-rotate(202deg) opacity(90%) ;
 }
 
 .x_clicked::after {
@@ -177,7 +166,6 @@ body {
     content: url("../assets/icon-x.svg");
     font-size: 50px; 
     line-height: 120px;
-
 }
 
 .x_hover::after {
@@ -357,5 +345,4 @@ input[type="radio"]:checked+label img {
     padding: 1rem;
     text-align: center;
     text-transform: uppercase;
-
 }

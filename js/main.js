@@ -69,7 +69,7 @@ const showWinnerCombinationColors = ( combination, winnerTurn ) => {
         squares[combination[2]].classList.add('winner-cell-x')
     }
     if(winnerTurn === turns[1]) {
-        squares[combination[0]].classList.add('winner-cell-o', 'o_hover')
+        squares[combination[0]].classList.add('winner-cell-o')
         squares[combination[1]].classList.add('winner-cell-o')
         squares[combination[2]].classList.add('winner-cell-o')
     }
