@@ -5,8 +5,11 @@ const imgTurn = document.getElementById('turn')
 const selection = document.getElementsByClassName("game__selection")
 const playing = document.getElementsByClassName("game__playing")
 const playerOptions = document.getElementsByName('selected')
+let imgContainer = document.createElement('img')
 let playerTurn = ""
 let gameVersus = ""
+let winnerSymbol = ""
+let winnerCombination = []
 
 const turns = [
     "X", "O"
@@ -22,12 +25,6 @@ const winnerCombinations = [
     [1, 4, 7],
     [2, 5, 8],
 ]
-
-//I HAVE TO RESET TO EMPTY VALUE THE CELLS FOR BEING ABLE TO DO THE HOVER TRICK OF EACH TURN
-//(ALSO, I AM NOT SURE THAT I HAVE TO DO THIS BUT I AM SO LAZY FOR SEARCH FOR AN OPTIMAL SOLUTION AT THE MOMENT)
-// for (let i = 0; i < iws.length; i++) {
-//     squares[i].textContent = ''
-// }
 
 const showTurn = () => {
     if (turn === turns[0]) {
@@ -49,7 +46,6 @@ const changeTurn = () => {
 
 const resetTheSquares = () => {
     for (let i = 0; i < squares.length; i++) {
-        squares[i].textContent = ''
         squares[i].className = "cell"
     }
 
@@ -63,22 +59,44 @@ const resetGame = () => {
     if (gameVersus === "CPU") startGameVsCpu()
 }
 
+const showWinnerCombinationColors = ( combination, winnerTurn ) => {
+    
+    if(winnerTurn === turns[0]) {
+        squares[combination[0]].classList.add('winner-cell-x')
+
+        squares[combination[1]].classList.add('winner-cell-x')
+
+        squares[combination[2]].classList.add('winner-cell-x')
+    }
+    if(winnerTurn === turns[1]) {
+        squares[combination[0]].classList.add('winner-cell-o', 'o_hover')
+        squares[combination[1]].classList.add('winner-cell-o')
+        squares[combination[2]].classList.add('winner-cell-o')
+    }
+
+}
+
 const checkWinner = () => {
     winnerCombinations.forEach(combination => {
+        console.log()
         if (
-            squares[combination[0]].textContent == turns[0] &&
-            squares[combination[1]].textContent == turns[0] &&
-            squares[combination[2]].textContent == turns[0]) {
+            squares[combination[0]].classList.contains('x_clicked') &&
+            squares[combination[1]].classList.contains('x_clicked') &&
+            squares[combination[2]].classList.contains('x_clicked')) {
             alert("X")
             winner = true
+            winnerCombination = combination
+            winnerSymbol = turns[0]
             return
         }
         else if (
-            squares[combination[0]].textContent == turns[1] &&
-            squares[combination[1]].textContent == turns[1] &&
-            squares[combination[2]].textContent == turns[1]) {
+            squares[combination[0]].classList.contains('o_clicked') &&
+            squares[combination[1]].classList.contains('o_clicked') &&
+            squares[combination[2]].classList.contains('o_clicked')) {
             alert("O")
             winner = true
+            winnerCombination = combination
+            winnerSymbol = turns[1]
             return
         }
     })
@@ -87,7 +105,7 @@ const checkWinner = () => {
 
 
 const onHoverSquare = (square) => {
-    if (!square.textContent && square.className !== "clicked" && !winner) {
+    if (!square.classList.contains("clicked") && !winner) {
         if (turn === turns[0])
             square.classList.toggle('x_hover')
         if (turn === turns[1])
@@ -119,34 +137,37 @@ const displayBoard = () => { playing[0].style.display = "block" }
 
 
 const checkEmptySquare = (square) => {
-    return (square.textContent != turns[0] && square.textContent != turns[1])
+    return !square.classList.contains('clicked')
 }
 
 const addContentSquare = (square) => {
-    square.textContent = turn
+    // square.textContent = turn
     square.className = "cell"
     square.classList.add('clicked')
-    if (square.textContent === turns[0]) {
+    if (turn === turns[0]) {
         square.classList.add('x_clicked')
-    } else {
+    } else if(turn === turns[1]){
         square.classList.add('o_clicked')
     }
 }
 
 const onClickCell = ( square ) => {
-    if (winner == true) return
+
     if (checkEmptySquare(square) && !winner) {
         addContentSquare(square)
         turn = changeTurn()
         showTurn()
         checkWinner()
+        if(winner === true && winnerCombination.length == 3)
+            showWinnerCombinationColors(winnerCombination, winnerSymbol)
         playerTurn = getPlayerSelection()
         if (gameVersus === "CPU" && turn !== playerTurn && !winner) {
             CPUMakeMove()
+            if(winner && winnerCombination.length == 3)
+                showWinnerCombinationColors(winnerCombination, winnerSymbol)
         }
         return 1
     }
-
     return 0
 }
 

@@ -2,6 +2,7 @@
     /* COLORS */
     --clr-primary-light-blue: 178, 60%, 48%;
     --clr-secondary-light-blue: 178, 75%, 65%;
+    --clr-pure-black: 0, 0%, 0%;
 
     --clr-primary-light-yellow: 39, 88%, 58%;
     --clr-secondary-light-yellow: 39, 100%, 69%;
@@ -123,7 +124,6 @@ body {
     gap: 15px;
 }
 
-
 .cell {
     width: 140px;
     height: 145px;
@@ -135,6 +135,37 @@ body {
     color: white;
     position: relative;
     color: hsl(var(--clr-semi-dark-navy));
+    cursor: pointer;
+}
+
+
+.winner-cell-x {
+    width: 140px;
+    height: 145px;
+    background-color: hsl(var(--clr-primary-light-blue));
+    box-shadow: 0px 8px rgba(0,0,0,0.25); 
+    border-radius: .8rem;
+    text-align: center;
+    line-height: 130px;
+    position: relative;
+    cursor: pointer;
+}
+
+.winner-cell-x ~ .x_clicked::after {
+    content: url('../assets/icon-x-outline.svg');
+    background-color: hsl(var(--clr-semi-dark-navy), 6);
+}
+
+.winner-cell-o {
+    width: 140px;
+    height: 145px;
+    background-color: hsl(var(--clr-semi-dark-navy));
+    box-shadow: 0px 8px rgba(0,0,0,0.25); 
+    border-radius: .8rem;
+    text-align: center;
+    line-height: 130px;
+    color: white;
+    position: relative;
     cursor: pointer;
 }
 
@@ -238,7 +269,7 @@ input[type="radio"]:checked+label img {
     width: 100%;
 }
 
-.game__selection-versus .btn {
+.btn {
     padding: .8rem;
     text-align: center;
     font-size: var(--fs-s);
@@ -249,12 +280,82 @@ input[type="radio"]:checked+label img {
     cursor: pointer;
 }
 
-.game__selection-versus .btn-yellow {
+.btn-gray {
+    background-color: hsl(var(--clr-silver));
+    box-shadow: 0px 8px hsl(var(--clr-silver), .8);
+}
+
+.btn-yellow {
     background-color: hsl(var(--clr-primary-light-yellow));
     box-shadow: 0px 8px hsl(var(--clr-primary-light-yellow), .8);
 }
 
-.game__selection-versus .btn-blue {
+.btn-blue {
     background-color: hsl(var(--clr-primary-light-blue));
     box-shadow: 0px 8px hsl(var(--clr-primary-light-blue), .8);
+}
+
+.game__modal {
+    display: flex;
+    position: fixed;
+    width: auto;
+    align-items: center;
+    background-color: hsl(var(--clr-pure-black), .65);
+    justify-content: center;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    z-index: 40 ;
+    display: none;
+}
+
+.game__modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: hsl(var(--clr-dark-navy));
+    width: 100%;
+    height: auto;
+    padding: .5rem;
+    text-align: center;
+    padding: 1.5rem;
+    text-transform: uppercase;
+}
+
+.game__modal-description {
+    color: hsl(var(--clr-silver));
+}
+
+.game__modal-winner-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+}
+
+.game__modal-winner {
+    font-size: var(--fs-l);
+    color: hsl(var(--clr-silver));
+    font-weight: 600;
+}
+
+.game__modal-actions {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    margin: .5rem;
+    align-self: center;
+    margin-inline: auto;
+    gap: 2rem;
+    font-size: var(--fs-xs);
+    color: hsl(var(--clr-dark-navy));
+}
+
+.game__modal-actions .btn {
+    height: auto;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+
 }
