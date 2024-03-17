@@ -52,55 +52,69 @@
             <div class="content">
                 <div class="board">
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
-                        onclick="onClickCell(this)">
-                    </div>
-
-                    <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
-                        onclick="onClickCell(this)">
-                    </div>
-                    <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
-                        onclick="onClickCell(this)">
-                    </div>
-                    <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
 
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
                     <div class="cell" 
-                        onmouseover="shadowTurn(this)" 
-                        onmouseout="shadowTurn(this)" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+
+                    <div class="cell" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
+                        onclick="onClickCell(this)">
+                    </div>
+                    <div class="cell" 
+                        onmouseover="onHoverSquare(this)" 
+                        onmouseout="onHoverSquare(this)" 
                         onclick="onClickCell(this)">
                     </div>
                 </div>
 
             </div>
+        </section>
+        <section class="game__modal">
+            <div class="game__modal-content">
+                <span class="game__modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+                <div class="game__modal-winner-info">
+                    <img class="game__modal-winner-img" src="./assets/icon-o.svg" alt="winner symbol">
+                    <h3 class="game__modal-winner">Round Tied</h3>
+                </div>
+                <div class="game__modal-actions">
+                    <button class="cancel btn btn-gray">Quit</button>
+                    <button class="continue btn btn-yellow">Next Round</button>
+                </div>
+            </div>
+
         </section>
     </main>
 
