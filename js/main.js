@@ -9,6 +9,7 @@ let imgContainer = document.createElement('img')
 let playerTurn = ""
 let gameVersus = ""
 let winnerSymbol = ""
+let counterBoard = 9
 let winnerCombination = []
 
 const turns = [
@@ -55,6 +56,7 @@ const resetGame = () => {
     turn = 'X'
     showTurn()
     winner = false
+    counterBoard = 9
     resetTheSquares()
     if (gameVersus === "CPU") startGameVsCpu()
 }
@@ -78,12 +80,10 @@ const showWinnerCombinationColors = ( combination, winnerTurn ) => {
 
 const checkWinner = () => {
     winnerCombinations.forEach(combination => {
-        console.log()
         if (
             squares[combination[0]].classList.contains('x_clicked') &&
             squares[combination[1]].classList.contains('x_clicked') &&
             squares[combination[2]].classList.contains('x_clicked')) {
-            alert("X")
             winner = true
             winnerCombination = combination
             winnerSymbol = turns[0]
@@ -93,13 +93,13 @@ const checkWinner = () => {
             squares[combination[0]].classList.contains('o_clicked') &&
             squares[combination[1]].classList.contains('o_clicked') &&
             squares[combination[2]].classList.contains('o_clicked')) {
-            alert("O")
             winner = true
             winnerCombination = combination
             winnerSymbol = turns[1]
             return
         }
     })
+    return
 
 }
 
@@ -123,11 +123,30 @@ const getPlayerSelection = () => {
     return option
 }
 
+const getTheLastSquare = () => {
+    for(let i = 0; i < squares.length; i++) {
+        if(!squares[i].classList.contains('clicked')) {
+            return squares[i]
+        }
+    }
+}
+
+
 const CPUMakeMove = () => {
+    if(counterBoard == 1) {
+        counterBoard--
+        onClickCell(getTheLastSquare())
+        checkWinner()
+        if(boardIsFull() && !winner) {
+            alert('Draw')
+        }
+        return
+    }
     let randomNumber = Math.floor(Math.random() * 8)
-    while (onClickCell(squares[randomNumber]) === 0) {
+    while (squares[randomNumber].classList.contains('clicked')) {
         randomNumber = Math.floor(Math.random() * 8)
     }
+    onClickCell(squares[randomNumber])
     checkWinner()
 }
 
@@ -141,7 +160,6 @@ const checkEmptySquare = (square) => {
 }
 
 const addContentSquare = (square) => {
-    // square.textContent = turn
     square.className = "cell"
     square.classList.add('clicked')
     if (turn === turns[0]) {
@@ -151,17 +169,32 @@ const addContentSquare = (square) => {
     }
 }
 
+const boardIsFull = () => {
+    for(let i = 0; i < squares.length; i++) {
+        if(!squares[i].classList.contains('clicked')) {
+            return false
+        }
+    }
+
+    return true
+}
+
 const onClickCell = ( square ) => {
 
-    if (checkEmptySquare(square) && !winner) {
+    if(winner || boardIsFull()) return
+    if (checkEmptySquare(square) && !winner && !boardIsFull()) {
+        counterBoard--
         addContentSquare(square)
         turn = changeTurn()
         showTurn()
         checkWinner()
-        if(winner === true && winnerCombination.length == 3)
+        if(boardIsFull() && !winner) {
+            alert('Draw')
+        }
+        if(winner && winnerCombination.length == 3)
             showWinnerCombinationColors(winnerCombination, winnerSymbol)
         playerTurn = getPlayerSelection()
-        if (gameVersus === "CPU" && turn !== playerTurn && !winner) {
+        if (gameVersus === "CPU" && turn !== playerTurn && !winner && !boardIsFull()) {
             CPUMakeMove()
             if(winner && winnerCombination.length == 3)
                 showWinnerCombinationColors(winnerCombination, winnerSymbol)
