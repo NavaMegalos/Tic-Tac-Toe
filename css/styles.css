@@ -55,7 +55,8 @@ body {
     flex-direction: column;
     justify-content: center;
     margin: 10rem 0;
-    gap: 25px;align-items: center;
+    gap: 25px;
+    align-items: center;
 }
 
 .game__selection-select {
@@ -76,7 +77,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: .5rem;
-    margin: 10rem 0;
+    margin: 6rem 0;
 }
 
 .game__playing-header {
@@ -84,6 +85,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: .8rem;
+    margin: 1rem;
 }
 
 
@@ -218,22 +220,26 @@ label {
     text-align: center;
     justify-content: center;
     align-items: center;
+    border-top: solid 8px hsl(var(--clr-dark-navy));
+    border-bottom: solid 8px hsl(var(--clr-dark-navy));
+    border-radius: .5rem;
 }
 
 label img {
     width: 30px;
     height: 30px;
-    /* filter: grayscale(); */
     filter: hue-rotate(199deg) saturate(35%) brightness(19%) opacity(85%);
 
 }
 
 label[for="x_selected"] {
     border-radius: .5rem 0 0 .5rem;
+    border-left: solid 8px hsl(var(--clr-dark-navy));
 }
 
 label[for="o_selected"] {
     border-radius: 0 .5rem .5rem 0;
+    border-right: solid 8px hsl(var(--clr-dark-navy));
 }
 
 input[type="radio"]:checked+label {
@@ -255,6 +261,46 @@ input[type="radio"]:checked+label img {
     flex-direction: column;
     gap: 2rem;
     width: 100%;
+}
+
+.game__points {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: center;
+    gap: 25px;
+}
+
+.item_points {
+    border: none;
+    margin: 1.5rem 0;
+    width: 30%;
+    border-radius: .7rem;
+    padding: .6rem;
+}
+
+.item_points span{
+    display: block;
+}
+
+#qty_x,
+#qty_ties,
+#qty_o {
+    font-weight: bold;
+    font-size: var(--fs-m);
+}
+
+.x_points {
+    background-color: hsl(var(--clr-primary-light-blue));
+}
+
+.o_points {
+    background-color: hsl(var(--clr-primary-light-yellow));
+}
+
+.ties_points {
+    background-color: hsl(var(--clr-silver));
 }
 
 .btn {
