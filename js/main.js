@@ -45,10 +45,10 @@ const winnerCombinations = [
 
 const showTurn = () => {
     if (turn === turns[0]) {
-        imgTurn.setAttribute("src", "../assets/icon-x.svg")
+        imgTurn.setAttribute("src", "/assets/icon-x.svg")
     }
     else if (turn === turns[1]) {
-        imgTurn.setAttribute("src", "../assets/icon-o.svg")
+        imgTurn.setAttribute("src", "/assets/icon-o.svg")
     }
 
 }

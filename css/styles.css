@@ -222,13 +222,12 @@ label {
     align-items: center;
     border-top: solid 8px hsl(var(--clr-dark-navy));
     border-bottom: solid 8px hsl(var(--clr-dark-navy));
-    border-radius: .5rem;
 }
 
 label img {
     width: 30px;
     height: 30px;
-    filter: hue-rotate(199deg) saturate(35%) brightness(19%) opacity(85%);
+    filter: hue-rotate(199deg) saturate(35%) brightness(19%) opacity(90%);
 
 }
 
@@ -247,7 +246,7 @@ input[type="radio"]:checked+label {
 }
 
 input[type="radio"]:checked+label img {
-    filter: grayscale();
+    filter: sepia(100%) grayscale() opacity(75%);
 }
 
 
