@@ -45,10 +45,10 @@ const winnerCombinations = [
 
 const showTurn = () => {
     if (turn === turns[0]) {
-        imgTurn.setAttribute("src", "/assets/icon-x.svg")
+        imgTurn.setAttribute("src", "./assets/icon-x.svg")
     }
     else if (turn === turns[1]) {
-        imgTurn.setAttribute("src", "/assets/icon-o.svg")
+        imgTurn.setAttribute("src", "./assets/icon-o.svg")
     }
 
 }
@@ -223,11 +223,11 @@ const displayModal = (winnerSymbol) => {
         }
 
         if (winnerSymbol == "X") {
-            winnerData.img = "../assets/icon-x.svg"
+            winnerData.img = "./assets/icon-x.svg"
             winnerData.letterColor = "178, 60%, 48%"
         }
         if (winnerSymbol == "O") {
-            winnerData.img = "../assets/icon-o.svg"
+            winnerData.img = "./assets/icon-o.svg"
             winnerData.letterColor = "39, 100%, 69%"
         }
     }
