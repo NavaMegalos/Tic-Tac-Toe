@@ -44,7 +44,7 @@
                     <img id="turn" on src="assets/icon-x.svg" width="20px" height="20px" alt="" style="filter: grayscale(); opacity: .4;">
                     <p> TURN </p>
                 </div>
-                <div onclick="resetGame()" class="game__playing-header-restart">
+                <div onclick="displayResetModal()" class="game__playing-header-restart">
                     <img src="./assets/icon-restart.svg" width="20px" height="20px" alt="restart button game">
                 </div>
             </div>
@@ -101,8 +101,25 @@
                 </div>
 
             </div>
+            <div class="game__points">
+                <div class="item_points x_points">
+                    <span id="x_title">CPU</span>
+                    <span id="qty_x">0</span>
+                </div>
+                <div class="item_points ties_points">
+                    <span>TIES</span>
+                    <span id="qty_ties">0</span>
+                
+                </div>
+                <div class="item_points o_points">
+                    <span id="o_title">YOU</span>
+                    <span id="qty_o">0</span>
+
+                </div>
+
+            </div>
         </section>
-        <section class="game__modal">
+        <section id="modal" class="game__modal">
             <div class="game__modal-content">
                 <span class="game__modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 <div class="game__modal-winner-info">
@@ -110,11 +127,21 @@
                     <h3 class="game__modal-winner">Round Tied</h3>
                 </div>
                 <div class="game__modal-actions">
-                    <button class="cancel btn btn-gray">Quit</button>
-                    <button class="continue btn btn-yellow">Next Round</button>
+                    <button onclick="quit()" id="modal-white-btn" class="cancel btn btn-gray">Quit</button>
+                    <button onclick="nextRound()" id="modal-yellow-btn" class="continue btn btn-yellow">Next Round</button>
                 </div>
             </div>
-
+        </section>
+        <section id="reset_modal" class="game__modal">
+            <div class="game__modal-content">
+                <div class="game__modal-winner-info">
+                    <h3 class="game__modal-winner">Restart Game?</h3>
+                </div>
+                <div class="game__modal-actions">
+                    <button onclick="hideResetModal()" id="modal-white-btn" class="cancel btn btn-gray">NO, CANCEL</button>
+                    <button onclick="resetGame()" id="modal-yellow-btn" class="continue btn btn-yellow">YES, RESTART</button>
+                </div>
+            </div>
         </section>
     </main>
 
