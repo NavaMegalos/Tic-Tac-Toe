@@ -1,13 +1,13 @@
-const squares = document.getElementsByClassName('cell')
-const imgTurn = document.getElementById('turn')
-const selection = document.getElementsByClassName("game__selection")
-const playing = document.getElementsByClassName("game__playing")
-const playerOptions = document.getElementsByName('selected')
+const squares = document.querySelectorAll('.cell')
+const imgTurn = document.querySelector('#turn')
+const selection = document.querySelectorAll('.game__selection')
+const playing = document.querySelectorAll(".game__playing")
+const playerOptions = document.querySelectorAll('[name="selected"]')
+const gameModalDescription = document.querySelectorAll('.game__modal-description')
+const gameModalImgWinner = document.querySelectorAll('.game__modal-winner-img')
+const gameModalWinner = document.querySelectorAll('.game__modal-winner')
 const gameModal = document.getElementById('modal');
 const resetModal = document.getElementById('reset_modal');
-const gameModalDescription = document.getElementsByClassName('game__modal-description')
-const gameModalImgWinner = document.getElementsByClassName('game__modal-winner-img')
-const gameModalWinner = document.getElementsByClassName('game__modal-winner')
 const gameModalWhiteBtn = document.getElementById('modal-white-btn')
 const gameModalYellowBtn = document.getElementById('modal-yellow-btn')
 const xTitle = document.getElementById('x_title')
@@ -15,66 +15,40 @@ const oTitle = document.getElementById('o_title')
 const qtyX = document.getElementById('qty_x')
 const qtyO = document.getElementById('qty_o')
 const qtyTies = document.getElementById('qty_ties')
+
 let winner = false
-let turn = 'X'
+let turn = "X"
 let playerTurn = ""
 let gameVersus = ""
 let winnerSymbol = ""
 let counterBoard = 9
 let winnerCombination = []
-let points = {
-    ties: 0,
-    x: 0,
-    o: 0
-}
+let points = { ties: 0, x: 0, o: 0 }
 
-const turns = [
-    "X", "O"
-];
+const turns = ["X", "O"];
 
 const winnerCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [0, 4, 8],
-    [2, 4, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [0, 4, 8], [2, 4, 6],
+    [1, 4, 7], [2, 5, 8],
 ]
 
 const showTurn = () => {
-    if (turn === turns[0]) {
-        imgTurn.setAttribute("src", "./assets/icon-x.svg")
-    }
-    else if (turn === turns[1]) {
-        imgTurn.setAttribute("src", "./assets/icon-o.svg")
-    }
-
+    const imgSrc = `./assets/icon-${turn.toLowerCase()}.svg`
+    imgTurn.setAttribute("src", imgSrc)
 }
 
-
 const changeTurn = () => {
-    return turn == turns[0] ?
-        turn = turns[1] :
-        turn = turns[0]
-
+    turn = (turn === turns[0]) ? turns[1] : turns[0]
 }
 
 const resetTheSquares = () => {
-    for (let i = 0; i < squares.length; i++) {
-        squares[i].className = "cell"
-    }
-
+    squares.forEach(square => square.className = 'cell')
 }
 
 const resetQty = () => {
-    qtyX.innerText = 0
-    qtyO.innerText = 0
-    qtyTies.innerText = 0
-    points.x = 0
-    points.o = 0
-    points.ties = 0
+    qtyX.innerText = qtyO.innerText = qtyTies.innerText = 0
+    points.x = points.o = points.ties = 0
 }
 
 const resetGame = () => {
@@ -91,60 +65,50 @@ const resetGame = () => {
 }
 
 const showWinnerCombinationColors = (combination, winnerTurn) => {
+    const [a, b, c] = combination;
+    const squareA = squares[a], squareB = squares[b], squareC = squares[c];
 
-    if (winnerTurn === turns[0]) {
-        squares[combination[0]].classList.add('winner-cell-x')
-        squares[combination[1]].classList.add('winner-cell-x')
-        squares[combination[2]].classList.add('winner-cell-x')
-    }
-    if (winnerTurn === turns[1]) {
-        squares[combination[0]].classList.add('winner-cell-o')
-        squares[combination[1]].classList.add('winner-cell-o')
-        squares[combination[2]].classList.add('winner-cell-o')
-    }
+    squareA.classList.add(`winner-cell-${winnerTurn.toLowerCase()}`)
+    squareB.classList.add(`winner-cell-${winnerTurn.toLowerCase()}`)
+    squareC.classList.add(`winner-cell-${winnerTurn.toLowerCase()}`)
 
 }
 
 const checkWinner = () => {
-    winnerCombinations.forEach(combination => {
-        if (
-            squares[combination[0]].classList.contains('x_clicked') &&
-            squares[combination[1]].classList.contains('x_clicked') &&
-            squares[combination[2]].classList.contains('x_clicked')) {
-            points.x++
-            winner = true
-            winnerCombination = combination
-            winnerSymbol = turns[0]
-            displayModal("X")
-            return
-        }
-        else if (
-            squares[combination[0]].classList.contains('o_clicked') &&
-            squares[combination[1]].classList.contains('o_clicked') &&
-            squares[combination[2]].classList.contains('o_clicked')) {
-            points.o++
-            winner = true
-            winnerCombination = combination
-            winnerSymbol = turns[1]
-            displayModal("O")
-            return
-        }
-    })
-    if (boardIsFull() && !winner) {
-        points.ties++
-        displayModal(null)
-        return
-    }
-    return
+    for (const combination of winnerCombinations) {
+        const [a, b, c] = combination;
+        const squareA = squares[a], squareB = squares[b], squareC = squares[c];
 
+        if (squareA.classList.contains('x_clicked') &&
+            squareB.classList.contains('x_clicked') &&
+            squareC.classList.contains('x_clicked')) {
+            points.x++;
+            winner = true;
+            winnerCombination = combination;
+            winnerSymbol = turns[0];
+            displayModal("X");
+            return;
+        } else if (squareA.classList.contains('o_clicked') &&
+            squareB.classList.contains('o_clicked') &&
+            squareC.classList.contains('o_clicked')) {
+            points.o++;
+            winner = true;
+            winnerCombination = combination;
+            winnerSymbol = turns[1];
+            displayModal("O");
+            return;
+        }
+    }
+
+    if (boardIsFull() && !winner) {
+        points.ties++;
+        displayModal(null);
+    }
 }
 
 const onHoverSquare = (square) => {
     if (!square.classList.contains("clicked") && !winner) {
-        if (turn === turns[0])
-            square.classList.toggle('x_hover')
-        if (turn === turns[1])
-            square.classList.toggle('o_hover')
+            square.classList.toggle(`${turn.toLowerCase()}_hover`)
     }
 }
 
@@ -161,6 +125,7 @@ const getPlayerSelection = () => {
 const getTheLastSquare = () => {
     for (let i = 0; i < squares.length; i++) {
         if (!squares[i].classList.contains('clicked')) {
+            console.log(squares[i])
             return squares[i]
         }
     }
@@ -196,7 +161,7 @@ const displayResetModal = () => { resetModal.style.display = "flex" }
 
 const displayModal = (winnerSymbol) => {
     let winnerData = {}
-    if(winnerSymbol == null) {
+    if (winnerSymbol == null) {
         gameModalDescription[0].style.display = "none"
         gameModalImgWinner[0].style.display = "none"
         gameModalWinner[0].innerText = "ROUND TIED"
@@ -208,26 +173,25 @@ const displayModal = (winnerSymbol) => {
     if (winnerSymbol) {
         winnerData.takes = "TAKES THE ROUND"
         if (getPlayerSelection() != winnerSymbol) {
-            if(gameVersus == "PLAYER") {
+            if (gameVersus == "PLAYER") {
                 winnerData.description = "PLAYER 2 WINS!"
             }
             else {
                 winnerData.description = "OH NO, YOU LOST..."
             }
         } else {
-            if(gameVersus == "PLAYER") {
+            if (gameVersus == "PLAYER") {
                 winnerData.description = "PLAYER 1 WINS!"
             } else {
                 winnerData.description = "YOU WON!"
             }
         }
+        winnerData.img = `./assets/icon-${winnerSymbol.toLowerCase()}.svg`
 
         if (winnerSymbol == "X") {
-            winnerData.img = "./assets/icon-x.svg"
             winnerData.letterColor = "178, 60%, 48%"
         }
         if (winnerSymbol == "O") {
-            winnerData.img = "./assets/icon-o.svg"
             winnerData.letterColor = "39, 100%, 69%"
         }
     }
@@ -248,11 +212,7 @@ const checkEmptySquare = (square) => {
 const addContentSquare = (square) => {
     square.className = "cell"
     square.classList.add('clicked')
-    if (turn === turns[0]) {
-        square.classList.add('x_clicked')
-    } else if (turn === turns[1]) {
-        square.classList.add('o_clicked')
-    }
+    square.classList.add(`${turn.toLowerCase()}_clicked`)
 }
 
 const boardIsFull = () => {
@@ -270,7 +230,7 @@ const onClickCell = (square) => {
     if (checkEmptySquare(square) && !winner && !boardIsFull()) {
         counterBoard--
         addContentSquare(square)
-        turn = changeTurn()
+        changeTurn()
         showTurn()
         checkWinner()
         if (winner && winnerCombination.length == 3)
@@ -298,7 +258,7 @@ const setTitlesPoints = (player1, player2) => {
 }
 
 const startGameVsCpu = () => {
-    if(counterBoard < 8) {
+    if (counterBoard < 8) {
         resetGame()
     }
     hideMenu()
@@ -312,7 +272,7 @@ const startGameVsCpu = () => {
 }
 
 const startGameVsPlayer = () => {
-    if(counterBoard < 9) {
+    if (counterBoard < 9) {
         resetGame()
     }
     hideMenu()
