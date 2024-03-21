@@ -16,7 +16,7 @@
         <section class="game__selection">
             <img src="./assets/logo.svg" width="72px" height="32px" alt="logo tic tac toe">
             <div class="game__selection-select">
-                <p>PICK PLAYER 1'S MARK</p>
+                <p class="player-pick-info">PICK PLAYER 1'S MARK</p>
                 <div class="game__selection-checkbox-selection">
                     <input type="radio" id="x_selected" name="selected" value="X" checked>
                     <label for="x_selected">
@@ -27,7 +27,7 @@
                         <img src="./assets/icon-o.svg" alt="">
                     </label>
                 </div>
-                <p>REMEMBER : X GOES FIRST </p>
+                <p class="remember">REMEMBER : X GOES FIRST </p>
             </div>
             <div class="game__selection-versus">
                 <button onclick="startGameVsCpu()" class="btn btn-yellow" type="button">NEW GAME (VS CPU)</button>
@@ -41,7 +41,7 @@
             <div class="game__playing-header">
                 <img src="./assets/logo.svg" width="70px" height="30px" alt="logo tic tac toe">
                 <div class="game__playing-header-turn">
-                    <img id="turn" on src="./assets/icon-x.svg" width="20px" height="20px" alt="" style="filter: grayscale(); opacity: .4;">
+                    <img id="turn" on src="./assets/icon-x.svg" width="20px" height="20px" alt="" style="filter: brightness(100%) grayscale(); opacity: 1;">
                     <p> TURN </p>
                 </div>
                 <div onclick="displayResetModal()" class="game__playing-header-restart">
@@ -103,23 +103,23 @@
             </div>
             <div class="game__points">
                 <div class="item_points x_points">
-                    <span id="x_title">CPU</span>
+                    <span id="title x_title">CPU</span>
                     <span id="qty_x">0</span>
                 </div>
                 <div class="item_points ties_points">
-                    <span>TIES</span>
+                    <span class="title">TIES</span>
                     <span id="qty_ties">0</span>
                 
                 </div>
                 <div class="item_points o_points">
-                    <span id="o_title">YOU</span>
+                    <span id="title o_title">YOU</span>
                     <span id="qty_o">0</span>
 
                 </div>
 
             </div>
         </section>
-        <section id="modal" class="game__modal">
+        <section id="modal" class="game__modal" style="display: none;">
             <div class="game__modal-content">
                 <span class="game__modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 <div class="game__modal-winner-info">
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </section>
-        <section id="reset_modal" class="game__modal">
+        <section id="reset_modal" class="game__modal" style="display: none;">
             <div class="game__modal-content">
                 <div class="game__modal-winner-info">
                     <h3 class="game__modal-winner">Restart Game?</h3>
